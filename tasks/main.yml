@@ -33,9 +33,15 @@
     url: "{{ k3s_rpm }}"
     dest: "{{ k3s_root_dir }}/"
 
+- name: Get RPM filename
+  ansible.builtin.find:
+    paths: "{{ k3s_root_dir }}"
+    patterns: "*.rpm"
+  register: k3s_rpm_file
+
 - name: Install k3s from RPM
   ansible.builtin.package:
-    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file }}"
+    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file.files }}"
     state: present
 
 - name: Install k3s
