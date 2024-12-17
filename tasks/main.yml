@@ -51,6 +51,8 @@
     patterns: "*.rpm"
   register: k3s_rpm_file
 
+- debug: "var=binary"
+
 - name: Wait for async tasks
   ansible.builtin.async_status:
     jid: "{{ item.ansible_job_id }}"
@@ -58,7 +60,7 @@
   register: job_result
   retries: 120
   delay: 1
-  loop: "{{ images.results + binary.results + install.results + rpm.results + [object] }}"
+  loop: "{{ images.results + binary.results + install.results + rpm.results }}"
 
 - name: Install k3s from RPM
   ansible.builtin.package:
