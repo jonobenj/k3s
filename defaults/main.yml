@@ -2,8 +2,8 @@
 # defaults file for k3s
 
 k3s_ulb_dir: /usr/local/bin
-k3s_images: https://github.com/k3s-io/k3s/releases/download/v1.31.3%2Bk3s1/k3s-airgap-images-amd64.tar
-k3s_binary: https://github.com/k3s-io/k3s/releases/download/v1.31.3%2Bk3s1/k3s
+k3s_images: https://github.com/k3s-io/k3s/releases/download/v1.30.7%2Bk3s1/k3s-airgap-images-amd64.tar
+k3s_binary: https://github.com/k3s-io/k3s/releases/download/v1.30.7%2Bk3s1/k3s
 k3s_install: https://get.k3s.io/
 k3s_rpm: https://github.com/k3s-io/k3s-selinux/releases/download/v1.6.latest.1/k3s-selinux-1.6-1.el9.noarch.rpm
 k3s_root_dir: /root/k3s
