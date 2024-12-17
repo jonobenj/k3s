@@ -25,12 +25,13 @@ Example Playbook
 ----------------
 
 ```yaml
-    - name: Install k3s
-      hosts: all
-      ansible.builtin.include_role:
-        name: k3s
-        apply:
-          become: true
+- name: Install k3s
+  hosts: all
+  tasks:
+    ansible.builtin.include_role:
+      name: k3s
+      apply:
+        become: true
 ```
 
 License
