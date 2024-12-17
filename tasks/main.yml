@@ -53,7 +53,7 @@
   ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment traefik --timeout=300s"
   register: traefik_result
   until: "traefik_result is not failed"
-  retries: 20
+  retries: 40
   delay: 2
   changed_when: false
 
@@ -61,7 +61,7 @@
   ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment coredns --timeout=300s"
   register: coredns_result
   until: "coredns_result is not failed"
-  retries: 20
+  retries: 40
   delay: 2
   changed_when: false
 
@@ -69,7 +69,7 @@
   ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment local-path-provisioner --timeout=300s"
   register: local_path_provisioner_result
   until: "local_path_provisioner_result is not failed"
-  retries: 20
+  retries: 40
   delay: 2
   changed_when: false
 
@@ -78,6 +78,6 @@
 #  ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment metrics-server --timeout=300s"
 #  register: metrics_server_result
 #  until: "metrics_server_result is not failed"
-#  retries: 20
+#  retries: 40
 #  delay: 2
 #  changed_when: false
