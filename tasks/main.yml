@@ -35,7 +35,7 @@
 
 - name: Install k3s from RPM
   ansible.builtin.package:
-    name: "{{ k3s_root_dir }}/{{ k3s_rpm }}"
+    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file }}"
     state: present
 
 - name: Install k3s

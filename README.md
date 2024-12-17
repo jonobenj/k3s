@@ -19,6 +19,7 @@ k3s_install: https://get.k3s.io/
 k3s_rpm: https://github.com/k3s-io/k3s-selinux/releases/download/v1.6.latest.1/k3s-selinux-1.6-1.el9.noarch.rpm
 k3s_root_dir: /root/k3s
 k3s_install_file: install.sh
+k3s_rpm_file: k3s-selinux-1.6-1.el9.noarch.rpm
 ```
 
 Example Playbook
