@@ -11,6 +11,7 @@
     url: "{{ k3s_images }}"
     dest: "{{ k3s_ulb_dir }}/"
   async: 500
+  poll: 0
   register: images
 
 - name: Pull k3s binary
@@ -19,6 +20,7 @@
     dest: "{{ k3s_ulb_dir }}/"
     mode: 0755
   async: 500
+  poll: 0
   register: binary
 
 - name: Ensure /root/k3s exists
@@ -32,6 +34,7 @@
     dest: "{{ k3s_root_dir }}/{{ k3s_install_file }}"
     mode: 0755
   async: 500
+  poll: 0
   register: install
 
 - name: Pull k3s RPM
@@ -39,6 +42,7 @@
     url: "{{ k3s_rpm }}"
     dest: "{{ k3s_root_dir }}/"
   async: 500
+  poll: 0
   register: rpm
 
 - name: Get RPM filename
