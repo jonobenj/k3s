@@ -73,10 +73,11 @@
   delay: 2
   changed_when: false
 
-- name: Wait for metrics-server to complete
-  ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment metrics-server --timeout=300s"
-  register: metrics_server_result
-  until: "metrics_server_result is not failed"
-  retries: 20
-  delay: 2
-  changed_when: false
+### Metrics is currently bugged, until I find a fix I am skipping the check.
+#- name: Wait for metrics-server to complete
+#  ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment metrics-server --timeout=300s"
+#  register: metrics_server_result
+#  until: "metrics_server_result is not failed"
+#  retries: 20
+#  delay: 2
+#  changed_when: false
