@@ -43,6 +43,7 @@
   ansible.builtin.package:
     name: "{{ k3s_root_dir }}/{{ k3s_rpm_file.files }}"
     state: present
+    disable_gpg_check: "{{ k3s_disable_yum_gpg_check | default(omit) }}"
 
 - name: Install k3s
   ansible.builtin.shell: "INSTALL_K3S_SKIP_DOWNLOAD=true {{ k3s_root_dir }}/{{ k3s_install_file }}"
