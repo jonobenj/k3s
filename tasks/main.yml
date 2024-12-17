@@ -39,7 +39,7 @@
     url: "{{ k3s_rpm }}"
     dest: "{{ k3s_root_dir }}/"
   async: 500
-  regsiter: rpm
+  register: rpm
 
 - name: Get RPM filename
   ansible.builtin.find:
