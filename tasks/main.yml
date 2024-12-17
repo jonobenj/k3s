@@ -60,7 +60,7 @@
   register: job_result
   retries: 120
   delay: 1
-  loop: "{{ images + binary + install + rpm }}"
+  loop: "{{ images|dict2items + binary|dict2items  + install|dict2items  + rpm|dict2items  }}"
 
 - name: Install k3s from RPM
   ansible.builtin.package:
