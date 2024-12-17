@@ -10,12 +10,16 @@
   ansible.builtin.get_url:
     url: "{{ k3s_images }}"
     dest: "{{ k3s_ulb_dir }}/"
+  async: 500
+  register: images
 
 - name: Pull k3s binary
   ansible.builtin.get_url:
     url: "{{ k3s_binary }}"
     dest: "{{ k3s_ulb_dir }}/"
     mode: 0755
+  async: 500
+  register: binary
 
 - name: Ensure /root/k3s exists
   ansible.builtin.file:
@@ -27,17 +31,30 @@
     url: "{{ k3s_install }}"
     dest: "{{ k3s_root_dir }}/{{ k3s_install_file }}"
     mode: 0755
+  async: 500
+  register: install
 
 - name: Pull k3s RPM
   ansible.builtin.get_url:
     url: "{{ k3s_rpm }}"
     dest: "{{ k3s_root_dir }}/"
+  async: 500
+  regsiter: rpm
 
 - name: Get RPM filename
   ansible.builtin.find:
     paths: "{{ k3s_root_dir }}"
     patterns: "*.rpm"
   register: k3s_rpm_file
+
+- name: Wait for async tasks
+  ansible.builtin.async_status:
+    jid: "{{ item.ansible_job_id }}"
+  until: job_result.finished
+  register: job_result
+  retries: 120
+  delay: 1
+  loop: "{{ images.results + binary.results + install.results + rpm.results + [object] }}"
 
 - name: Install k3s from RPM
   ansible.builtin.package:
