@@ -10,7 +10,6 @@
   ansible.builtin.get_url:
     url: "{{ k3s_images }}"
     dest: "{{ k3s_ulb_dir }}/"
-  when: false
 
 - name: Pull k3s binary
   ansible.builtin.get_url:
