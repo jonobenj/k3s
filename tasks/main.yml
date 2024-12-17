@@ -1,0 +1,42 @@
+---
+# tasks file for k3s
+
+- name: Ensure "{{ k3s_ulb_dir }}" exists
+  ansible.builtin.file:
+    path: "{{ k3s_ulb_dir }}"
+    state: directory
+
+- name: Pull k3s images
+  ansible.builtin.get_url:
+    url: "{{ k3s_images }}"
+    dest: "{{ k3s_ulb_dir }}/"
+
+- name: Pull k3s binary
+  ansible.builtin.get_url:
+    url: "{{ k3s_binary }}"
+    dest: "{{ k3s_ulb_dir }}/"
+    mode: 0755
+
+- name: Ensure /root/k3s exists
+  ansible.builtin.file:
+    path: /root/k3s
+    state: directory
+
+- name: Pull www.k3s.io to install.sh
+  ansible.builtin.get_url:
+    url: "{{ k3s_install }}"
+    dest: "{{ k3s_root_dir }}"
+    mode: 0755
+
+- name: Pull k3s RPM
+  ansible.builtin.get_url:
+    url: "{{ k3s_rpm }}"
+    dest: "{{ k3s_root_dir }}"
+
+- name: Install k3s from RPM
+  ansible.builtin.package:
+    name: "{{ k3s_root_dir }}/{{ k3s_rpm }}"
+    state: present
+
+- name: Install k3s
+  ansible.builtin.shell: INSTALL_K3S_SKIP_DOWNLOAD=true "{{ k3s_root_dir }}"/install.sh
