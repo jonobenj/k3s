@@ -50,13 +50,13 @@
   ansible.builtin.shell: "INSTALL_K3S_SKIP_DOWNLOAD=true {{ k3s_root_dir }}/{{ k3s_install_file }}"
 
 - name: Wait for traefik to complete
-  ansible.builtin.command: "kubectl rollout -n default status -n kube-system deployment traefik --timeout=300s"
+  ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment traefik --timeout=300s"
 
 - name: Wait for coredns to complete
-  ansible.builtin.command: "kubectl rollout -n default status -n kube-system deployment coredns --timeout=300s"
+  ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment coredns --timeout=300s"
 
 - name: Wait for local-path-provisioner to complete
-  ansible.builtin.command: "kubectl rollout -n default status -n kube-system deployment local-path-provisioner --timeout=300s"
+  ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment local-path-provisioner --timeout=300s"
 
 - name: Wait for metrics-server to complete
-  ansible.builtin.command: "kubectl rollout -n default status -n kube-system deployment metrics-server --timeout=300s"
+  ansible.builtin.command: "{{ k3s_ulb_dir }}/kubectl rollout -n default status -n kube-system deployment metrics-server --timeout=300s"
