@@ -8,7 +8,7 @@ Requirements
 
 Linux box built with internet access and root access.
 
-Role Variables
+Role Variables with Defaults
 --------------
 
 ```yaml
