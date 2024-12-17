@@ -36,7 +36,7 @@
 
 - name: Get RPM filename
   ansible.builtin.find:
-    paths: "{{ k3s_root_dir }}/"
+    paths: "{{ k3s_root_dir }}"
     patterns: '*.rpm'
   register: k3s_rpm_file
 
@@ -44,7 +44,7 @@
 
 - name: Install k3s from RPM
   ansible.builtin.package:
-    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file.files.path }}"
+    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file.files.0.path }}"
     state: present
     disable_gpg_check: "{{ k3s_disable_yum_gpg_check | default(omit) }}"
 
