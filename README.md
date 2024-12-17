@@ -28,10 +28,11 @@ Example Playbook
 - name: Install k3s
   hosts: all
   tasks:
-    ansible.builtin.include_role:
-      name: k3s
-      apply:
-        become: true
+    - name: Call k3s role
+      ansible.builtin.include_role:
+        name: k3s
+        apply:
+          become: true
 ```
 
 License
