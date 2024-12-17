@@ -10,6 +10,7 @@
   ansible.builtin.get_url:
     url: "{{ k3s_images }}"
     dest: "{{ k3s_ulb_dir }}/"
+  when: false
 
 - name: Pull k3s binary
   ansible.builtin.get_url:
@@ -36,14 +37,14 @@
 - name: Get RPM filename
   ansible.builtin.find:
     paths: "{{ k3s_root_dir }}"
-    patterns: "*.rpm"
+    patterns: '*.rpm'
   register: k3s_rpm_file
 
 - debug: "var=k3s_rpm_file"
 
 - name: Install k3s from RPM
   ansible.builtin.package:
-    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file.files }}"
+    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file.files.path }}"
     state: present
     disable_gpg_check: "{{ k3s_disable_yum_gpg_check | default(omit) }}"
 
