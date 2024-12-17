@@ -43,10 +43,11 @@
 - debug: "var=k3s_rpm_file"
 
 - name: Install k3s from RPM
-  ansible.builtin.dnf:
-    name: "{{ k3s_root_dir }}/{{ k3s_rpm_file.files.0.path }}"
+  ansible.builtin.package:
+    name: "{{ item.path }}"
     state: present
     disable_gpg_check: "{{ k3s_disable_yum_gpg_check | default(omit) }}"
+  with_items: "{{ k3s_rpm_file.files }}"
 
 - name: Install k3s
   ansible.builtin.shell: "INSTALL_K3S_SKIP_DOWNLOAD=true {{ k3s_root_dir }}/{{ k3s_install_file }}"
