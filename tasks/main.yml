@@ -36,7 +36,7 @@
 
 - name: Get RPM filename
   ansible.builtin.find:
-    paths: "{{ k3s_root_dir }}"
+    paths: "{{ k3s_root_dir }}/"
     patterns: '*.rpm'
   register: k3s_rpm_file
 
